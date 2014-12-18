@@ -13,7 +13,7 @@ public class Cities {
 
     }
 
-    //LAZY GETTER: se crean las varibles en el ultimo momento
+    //LAZY GETTER: se crean las variables en el ultimo momento
     public List<City> getCities() {
         if (cities == null){
             cities = new ArrayList<City>();
@@ -37,4 +37,11 @@ public class Cities {
         return getCities();
     }
 
+    public List<String> cityNames(){
+        List<String> names = new ArrayList<String>();
+        for (City city: getCities()){
+            names.add(city.getName());
+        }
+        return names;
+    }
 }
