@@ -136,6 +136,9 @@ public class CityListActivity extends ActionBarActivity {
                     Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
 
                     Intent i = new Intent(getActivity(), WeatherForecastActivity.class);
+                    City city = getMyCities().getCities().get(position);
+                    i.putExtra(Constants.KEY_INTENT_SHOW_CITY_CURRENT_CONDITION, city);
+
                     startActivity(i);
                 }
             });

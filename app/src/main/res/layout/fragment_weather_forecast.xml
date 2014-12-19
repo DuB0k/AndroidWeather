@@ -4,9 +4,43 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
+    android:background="@drawable/gradient_list"
     tools:context="com.talentum.dubok.weatherworkd.activities.WeatherForecastActivity$PlaceholderFragment">
 
-    <TextView android:text="@string/hello_world" android:layout_width="wrap_content"
+    <TextView
+        android:id="@+id/city_name"
+        android:textSize="70sp"
+        android:textColor="@android:color/holo_orange_dark"
+        android:text="@string/hello_world"
+        android:gravity="center"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content" />
+
+
+    <ImageView
+        android:id="@+id/weatherIcon"
+        android:src="@drawable/weather"
+        android:layout_below="@id/city_name"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <TextView
+        android:id="@+id/temperature"
+        android:text="22º C"
+        android:textSize="50sp"
+        android:textColor="@android:color/white"
+        android:layout_below="@id/city_name"
+        android:layout_alignParentRight="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:visibility="gone"/>
 
 </RelativeLayout>

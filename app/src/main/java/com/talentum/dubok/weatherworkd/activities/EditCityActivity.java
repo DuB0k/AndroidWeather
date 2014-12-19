@@ -15,6 +15,7 @@ import android.widget.EditText;
 import com.talentum.dubok.weatherworkd.Constants;
 import com.talentum.dubok.weatherworkd.R;
 import com.talentum.dubok.weatherworkd.model.City;
+import com.talentum.dubok.weatherworkd.util.AppSettings;
 
 public class EditCityActivity extends ActionBarActivity {
 
@@ -43,6 +44,36 @@ public class EditCityActivity extends ActionBarActivity {
         }
     }
 
+    /*
+    * Breve resumen sobre los estados del sistema:
+    *
+    * OnCreate -> Cosas que solo se deben hacer la primera vez
+    * OnPause  -> Para guardar cosas cuando se pasa a segundo plano
+    *       Podemos guardar en las preferencias del sistema o en un bbdd
+    * OnResume -> Para recuperar cosas cuando ya no estas en segundo plano
+    *
+    * El resto de estados ignorarlos.
+    * */
+
+     @Override
+    protected void onPause() {
+        super.onPause();
+
+        AppSettings settings = new AppSettings();
+        settings.setContext(this);
+        settings.saveCityName(txtCityName.getText().toString());
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        AppSettings settings = new AppSettings();
+        settings.setContext(this);
+        txtCityName.setText(settings.readCityName());
+
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
