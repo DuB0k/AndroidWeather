@@ -8,5 +8,5 @@
         android:title="@string/bttAddCity"
         android:icon="@android:drawable/ic_menu_add"
         android:orderInCategory="100"
-        app:showAsAction="never" />
+        app:showAsAction="always" />
 </menu>

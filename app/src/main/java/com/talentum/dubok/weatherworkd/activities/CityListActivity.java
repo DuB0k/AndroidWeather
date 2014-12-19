@@ -28,6 +28,7 @@ public class CityListActivity extends ActionBarActivity {
 
     private Cities cities;
     private List<String> cityNames;
+    private PlaceholderFragment f;
 
 
     @Override
@@ -38,7 +39,7 @@ public class CityListActivity extends ActionBarActivity {
         cities = new MockDataBase().query();
         cityNames = cities.cityNames();
 
-        PlaceholderFragment f = new PlaceholderFragment();
+        f = new PlaceholderFragment();
 
         f.setMyList(cityNames);
         f.setMyCities(cities);
@@ -53,24 +54,33 @@ public class CityListActivity extends ActionBarActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
+
         getMenuInflater().inflate(R.menu.menu_city_list, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
+
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_new_city) {
+            // el  1 es para identificar la peticion, por si se llama desde distintos sitios
+            startActivityForResult(new Intent(this, EditCityActivity.class), 1);
+
             return true;
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode == Constants.ADDING_CITY){
+            City addedCity = data.getParcelableExtra(Constants.KEY_RESULT_INTENT_ADDED_CITY);
+            cities.addCity(addedCity);
+            f.refreshData();
+        }
     }
 
     public static class PlaceholderFragment extends Fragment {
@@ -79,6 +89,14 @@ public class CityListActivity extends ActionBarActivity {
         private List<String> myList;
         private Cities myCities;
         ListView listView;
+
+        public void refreshData(){
+            myList = myCities.cityNames();
+            adapter = new ArrayAdapter<String>(getActivity(),
+                                android.R.layout.simple_list_item_1,
+                                     getMyList());
+            listView.setAdapter(adapter);
+        }
 
         public Cities getMyCities() {
             return myCities;

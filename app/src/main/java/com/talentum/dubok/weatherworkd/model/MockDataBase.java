@@ -9,7 +9,11 @@ public class MockDataBase {
 
         Cities cities = new Cities();
 
-        for (int i=0; i<100; i++){
+        //Xapuza para conseguir aniadir algo
+        City c  = new City("Madrid");
+        cities.addCity(c);
+
+        for (int i=0; i<1; i++){
             City city = new City("City " +i);
             cities.addCity(city);
         }
